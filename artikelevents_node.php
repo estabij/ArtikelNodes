@@ -25,7 +25,6 @@ $NodeFileName           = $_GET['n'];
 $EventsFileName         = $_GET['e']; 
 
 // read the events file
-//artnr;color;prodtree;brand1;ev1;ev2;ev3;ev4;ev5;event;description;item;company;brand2;itemname
 $iData = array();
 if (($handle = fopen($EventsFileName, "r")) !== FALSE) {
   $linecount=0;
@@ -43,7 +42,7 @@ if (($handle = fopen($EventsFileName, "r")) !== FALSE) {
 			 'itemname' => $line[14], 'dummy' => $line[15] );
     }
     else {
-            echo "linecount in eventsfile is not 16 but ".count($line)." at ".$linecount."!\n";
+      echo "ERROR: Column count in eventsfile is not 16 but ".count($line)." at ".$linecount."!\n";
     }
   }
 } else {
@@ -64,7 +63,7 @@ if (($handle = fopen($NodeFileName, "r")) !== FALSE) {
                          'ev2'      => $line[4], 'brand'        => $line[5] );
     }  
     else {
-            echo "linecount in nodefile is not 6 at ".$linecount."!\n";
+            echo "ERROR: Column count in nodefile is not 6 at ".$linecount."!\n";
     }	
   }
 } else {
