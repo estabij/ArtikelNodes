@@ -88,7 +88,7 @@ foreach ($iData as $iDataLine) {
 $hdr = array( 'artnr', 'color', 'prodtree', 'brand1', 'ev1', 'ev2', 'ev3', 'ev4', 'ev5', 'event', 'description', 'item', 'company', 'brand2', 'itemname' );
 
 foreach ($hdr as $columnname) {
-	echo $columnname.$sep;
+  echo $columnname.$sep;
 }
 echo "\n";
 
