@@ -33,7 +33,7 @@ if (($handle = fopen($ItemsFileName, "r")) !== FALSE) {
     $linecount++;
     if(count($line)==9) {
       $iData[] = array(  'artnr' => $line[0], 'color'  => $line[1], 
-                         'prodtree' => $line[2], 'brand1' => $line[3],
+                         'prodtree' => $line[2], 'brand' => $line[3],
                          'ev1' => $line[4], 'ev2' => $line[5],
                          'ev3' => $line[6], 'ev4' => $line[7],              
                          'ev5' => $line[8] );
@@ -56,7 +56,7 @@ if (($handle = fopen($ArtikelEventsFileName, "r")) !== FALSE) {
     if(count($line)==6) {
       $aeData[] = array(  'event' => $line[0], 'description'  => $line[1], 
                           'item'  => $line[2], 'company'      => $line[3],
-                          'brand2' => $line[4], 'itemname'     => $line[5] );
+                          'brand' => $line[4], 'itemname'     => $line[5] );
     } else {
       echo "ERROR: columns of artikelevents file not 6 at line ".$linecount."!\n";
     }
@@ -66,26 +66,58 @@ if (($handle = fopen($ArtikelEventsFileName, "r")) !== FALSE) {
 }
 fclose($handle);
 
-$aeDataLineEmpty = array( 'event' => '', 'description'  => '', 
-                          'item'  => '', 'company'      => '',
-                          'brand2' => '', 'itemname'     => '' );
-
 // extend the article items with the events
 $mapping = array();
 foreach ($iData as $iDataLine) {
   $mapped = false;
   foreach ( $aeData as $aeDataLine ) {  
-    if ( $iDataLine['artnr'] == $aeDataLine['item']) {
-      $mapping[] = array_merge($iDataLine, $aeDataLine);  
+    
+    $a = intval( $iDataLine['artnr'] );
+    $b = intval( $aeDataLine['item'] );
+    if ( $a == $b ) {
+     
+      if ( $iDataLine['ev1'] ) {
+         $event = $iDataLine['ev1'];
+      } else {
+        $event = $aeDataLine['event'];         
+      }
+  
+      if ( $iDataLine['brand'] ) {
+        $brand = $iDataLine['brand'];
+      } else {
+        $brand = $aeDataLine['brand'];         
+      }
+        
+      $mapping[] =  array( 
+                  'artnr'   => $iDataLine['artnr'], 
+                  'color'   => $iDataLine['color'],
+                  'prodtree'=> $iDataLine['prodtree'],
+                  'brand'   => $brand,
+                  'ev1'     => $event,
+                  'ev2'     => $iDataLine['ev2'],
+                  'ev3'     => $iDataLine['ev3'],
+                  'ev4'     => $iDataLine['ev4'],
+                  'ev5'     => $iDataLine['ev5'] );
+              
       $mapped = true;
     }
   }
   if ( !$mapped ) {
-    $mapping[] =  array_merge($iDataLine, $aeDataLineEmpty); 
+    $mapping[] =  array( 
+                  'artnr'   => $iDataLine['artnr'], 
+                  'color'   => $iDataLine['color'],
+                  'prodtree'=> $iDataLine['prodtree'],
+                  'brand'   => $iDataLine['brand'],
+                  'ev1'     => $iDataLine['ev1'],
+                  'ev2'     => $iDataLine['ev2'],
+                  'ev3'     => $iDataLine['ev3'],
+                  'ev4'     => $iDataLine['ev4'],
+                  'ev5'     => $iDataLine['ev5'] );
+
   }
 }
 
-$hdr = array( 'artnr', 'color', 'prodtree', 'brand1', 'ev1', 'ev2', 'ev3', 'ev4', 'ev5', 'event', 'description', 'item', 'company', 'brand2', 'itemname' );
+$hdr = array( 'artnr', 'color', 'prodtree', 'brand', 'ev1', 'ev2', 'ev3', 'ev4', 'ev5' );
 
 foreach ($hdr as $columnname) {
   echo $columnname.$sep;
