@@ -124,12 +124,12 @@ foreach ($iData as $mappingLine) {
       if ( ( $prodtree == $prodtree2 ) && ( $event == $ev1 ) && ( $brand == $brand2 ) ) {
 
         $line = array( 'node' => $node, 
-                             'artnr' => $artnr, 
-                             'color' => $color,  
+                             'artnr'    => $artnr, 
+                             'color'    => $color,  
                              'prodtree' => $prodtree, 
-                             'event' => $ev1, 
-                             'event2' => $ev2, 
-                             'brand' => $brand );
+                             'event'    => $ev1, 
+                             'event2'   => $ev2, 
+                             'brand'    => $brand );
 
         foreach ($line as $word) {
            echo $word.$sep;
@@ -154,12 +154,12 @@ foreach ($iData as $mappingLine) {
       if ( ( $prodtree == $prodtree2 ) && ( $event == $ev1 ) ) {
 
         $line = array( 'node' => $node, 
-                             'artnr' => $artnr, 
-                             'color' => $color,  
+                             'artnr'    => $artnr, 
+                             'color'    => $color,  
                              'prodtree' => $prodtree, 
-                             'event' => $ev1, 
-                             'event2' => $ev2, 
-                             'brand' => $brand );
+                             'event'    => $ev1, 
+                             'event2'   => $ev2, 
+                             'brand'    => $brand );
 
         foreach ($line as $word) {
            echo $word.$sep;
@@ -184,12 +184,12 @@ foreach ($iData as $mappingLine) {
       if ( ( $prodtree == $prodtree2 ) && ( $brand == $brand2 ) ) {
 
         $line = array( 'node' => $node, 
-                             'artnr' => $artnr, 
-                             'color' => $color,  
+                             'artnr'    => $artnr, 
+                             'color'    => $color,  
                              'prodtree' => $prodtree, 
-                             'event' => $ev1, 
-                             'event2' => $ev2, 
-                             'brand' => $brand );
+                             'event'    => $ev1, 
+                             'event2'   => $ev2, 
+                             'brand'    => $brand );
 
         foreach ($line as $word) {
            echo $word.$sep;
@@ -214,12 +214,12 @@ foreach ($iData as $mappingLine) {
       if ( ( $event == $ev1 ) && ( $brand == $brand2 ) ) {
 
         $line = array( 'node' => $node, 
-                             'artnr' => $artnr, 
-                             'color' => $color,  
+                             'artnr'    => $artnr, 
+                             'color'    => $color,  
                              'prodtree' => $prodtree, 
-                             'event' => $ev1, 
-                             'event2' => $ev2, 
-                             'brand' => $brand );
+                             'event'    => $ev1, 
+                             'event2'   => $ev2, 
+                             'brand'    => $brand );
 
         foreach ($line as $word) {
            echo $word.$sep;
@@ -247,12 +247,12 @@ foreach ($iData as $mappingLine) {
               ( ($event == $ev1)        && $prodtree2=='' && $brand2=='' )) {
      
         $line = array( 'node' => $node, 
-                             'artnr' => $artnr, 
-                             'color' => $color,  
+                             'artnr'    => $artnr, 
+                             'color'    => $color,  
                              'prodtree' => $prodtree, 
-                             'event' => $ev1, 
-                             'event2' => $ev2, 
-                             'brand' => $brand );
+                             'event'    => $ev1, 
+                             'event2'   => $ev2, 
+                             'brand'    => $brand );
 
         foreach ($line as $word) {
            echo $word.$sep;
