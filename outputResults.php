@@ -42,12 +42,12 @@ function outputNodeLine ( $iData, $nDataLine ) {
   $nodeEvent2       = $nDataLine['ev2']; 
   $nodeBrand        = $nDataLine['brand'];
   
-//  echo "node=".$nodeNode."\n";
-//  echo "nodeProdTree=".$nodeProdtree."\n";
-//  echo "nodeEvent1=".$nodeEvent1."\n";
-//  echo "nodeEvent2=".$nodeEvent2."\n";
-//  echo "nodeBrand=".$nodeBrand."\n";
-//      
+  echo "node=".$nodeNode."\n";
+  echo "nodeProdTree=".$nodeProdtree."\n";
+  echo "nodeEvent1=".$nodeEvent1."\n";
+  echo "nodeEvent2=".$nodeEvent2."\n";
+  echo "nodeBrand=".$nodeBrand."\n";
+      
   foreach ( $iData as $iDataLine ) { 
     
     $artikelProdtree  = $iDataLine['prodtree'];
@@ -164,10 +164,16 @@ function outputNodeLine ( $iData, $nDataLine ) {
       }    
 
       //0111     
-      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {echo "0111\n";
+      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        echo "0111\n";
+        echo "VOOR\n";
+                 echo $nodeProdtree.'-'.$artikelProdtree.' -- '.$nodeEvent1.'-'.$artikelEvent.' -- '.$nodeBrand.'-'.$artikelBrand."\n";
+ 
         if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
+          echo "PRINTLINE\n";
         }
+        echo "NA\n";
       }  
 
     }
