@@ -30,7 +30,7 @@ $iData = array();
 if (($handle = fopen($ItemsFileName, "r")) !== FALSE) {
   fgetcsv($handle, 1000, $sep); //skip first line
   while (($line = fgetcsv($handle, 1000, $sep)) !== FALSE) {
-	$linecount++;
+    $linecount++;
     if(count($line)==9) {
       $iData[] = array(  'artnr' => $line[0], 'color'  => $line[1], 
                          'prodtree' => $line[2], 'brand1' => $line[3],
@@ -38,8 +38,8 @@ if (($handle = fopen($ItemsFileName, "r")) !== FALSE) {
                          'ev3' => $line[6], 'ev4' => $line[7],              
                          'ev5' => $line[8] );
     } else {
-		echo "ERROR: columns of items file not 9 at line ".$linecount."!\n";
-	}
+      echo "ERROR: columns of items file not 9 at line ".$linecount."!\n";
+    }
   }
 } else {
   die('ERROR: Cannot open article file!');
@@ -52,14 +52,14 @@ $aeData = array();
 if (($handle = fopen($ArtikelEventsFileName, "r")) !== FALSE) {
   fgetcsv($handle, 1000, $sep); //skip first line
   while (($line = fgetcsv($handle, 1000, $sep)) !== FALSE) {
-	$linecount++;
+    $linecount++;
     if(count($line)==6) {
       $aeData[] = array(  'event' => $line[0], 'description'  => $line[1], 
                           'item'  => $line[2], 'company'      => $line[3],
                           'brand2' => $line[4], 'itemname'     => $line[5] );
     } else {
-		echo "ERROR: columns of artikelevents file not 6 at line ".$linecount."!\n";
-	}
+      echo "ERROR: columns of artikelevents file not 6 at line ".$linecount."!\n";
+    }
   }
 } else {
   die('ERROR: Cannot open article events file!');

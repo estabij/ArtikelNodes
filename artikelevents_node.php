@@ -31,20 +31,20 @@ if (($handle = fopen($EventsFileName, "r")) !== FALSE) {
   $linecount=0;
   fgetcsv($handle, 1000, $sep); //skip first line
   while (($line = fgetcsv($handle, 1000, $sep)) !== FALSE) {
-	$linecount++;
+    $linecount++;
     if(count($line)==16) {
       $iData[] = array(  'artnr' => $line[0], 'color'  => $line[1], 
                          'prodtree' => $line[2], 'brand1' => $line[3],
                          'ev1' => $line[4], 'ev2' => $line[5],
                          'ev3' => $line[6], 'ev4' => $line[7],              
                          'ev5' => $line[8], 'event' => $line[9],
-						 'description' => $line[10], 'item' => $line[11], 
-						 'company' => $line[12], 'brand2' => $line[13], 
-						 'itemname' => $line[14], 'dummy' => $line[15] );
+			 'description' => $line[10], 'item' => $line[11], 
+			 'company' => $line[12], 'brand2' => $line[13], 
+			 'itemname' => $line[14], 'dummy' => $line[15] );
     }
-	else {
-		echo "linecount in eventsfile is not 16 but ".count($line)." at ".$linecount."!\n";
-	}
+    else {
+            echo "linecount in eventsfile is not 16 but ".count($line)." at ".$linecount."!\n";
+    }
   }
 } else {
   die('ERROR: Cannot open article file!');
@@ -54,18 +54,18 @@ fclose($handle);
 // read the browser node file
 $nData = array();
 if (($handle = fopen($NodeFileName, "r")) !== FALSE) {
- $linecount=0;
+  $linecount=0;
   fgetcsv($handle, 1000, $sep); //skip first line
   while (($line = fgetcsv($handle, 1000, $sep)) !== FALSE) {
-	$linecount++;
+    $linecount++;
     if(count($line)==6) {
       $nData[] = array(  'node'     => $line[0], 'description'  => $line[1], 
                          'prodtree' => $line[2], 'ev1'          => $line[3],
                          'ev2'      => $line[4], 'brand'        => $line[5] );
     }  
-	else {
-		echo "linecount in nodefile is not 6 at ".$linecount."!\n";
-	}	
+    else {
+            echo "linecount in nodefile is not 6 at ".$linecount."!\n";
+    }	
   }
 } else {
   die('ERROR: Cannot browser node file!');
@@ -99,17 +99,6 @@ foreach ($iData as $mappingLine) {
   $artnr    = $mappingLine['artnr'];
   $color    = $mappingLine['color'];
   $prodtree = $mappingLine['prodtree'];
-  
-  $debugTrees = array('ALCNAFBFFF', 'ALCNAFBFBC', 'ALCNAFBFAR', 'ALBXAFBFBG', 'ALBXAFBFFP', 'ALCNAFBFFP', 'ALCNAFBFHN' );
-  $debugNode = 13225;
-  
-  foreach ($debugTrees as $dt) {
-      if ( $prodtree == $dt ) {
-          echo "DEBUG LET OP prodtree = $prodtree\n";
-      }
-  }
-  
-  echo "DEBUG: artnr=".$artnr."\n";
 
   if ( isset($mappingLine['event'])) {
     $event    = $mappingLine['event'];
@@ -134,8 +123,6 @@ foreach ($iData as $mappingLine) {
       $brand2     = $nDataLine['brand']; 
 
       if ( ( $prodtree == $prodtree2 ) && ( $event == $ev1 ) && ( $brand == $brand2 ) ) {
-
-		echo "DEBUG Rule 1 $prodtree, $event, $brand\n";
 
         $line = array( 'node' => $node, 
                              'artnr' => $artnr, 
@@ -167,8 +154,6 @@ foreach ($iData as $mappingLine) {
 
       if ( ( $prodtree == $prodtree2 ) && ( $event == $ev1 ) ) {
 
-		echo "DEBUG Rule 2 $prodtree, $event\n";
-
         $line = array( 'node' => $node, 
                              'artnr' => $artnr, 
                              'color' => $color,  
@@ -198,8 +183,6 @@ foreach ($iData as $mappingLine) {
       $brand2     = $nDataLine['brand']; 
 
       if ( ( $prodtree == $prodtree2 ) && ( $brand == $brand2 ) ) {
-		
-		echo "DEBUG Rule 2 $prodtree, $brand\n";
 
         $line = array( 'node' => $node, 
                              'artnr' => $artnr, 
@@ -230,8 +213,6 @@ foreach ($iData as $mappingLine) {
       $brand2     = $nDataLine['brand']; 
 
       if ( ( $event == $ev1 ) && ( $brand == $brand2 ) ) {
-		
-		echo "DEBUG Rule 3 $event, $brand\n";
 
         $line = array( 'node' => $node, 
                              'artnr' => $artnr, 
@@ -266,8 +247,6 @@ foreach ($iData as $mappingLine) {
               ( ($brand == $brand2)     && $ev1=='' && $ev2=='' && $prodtree2=='' ) ||
               ( ($event == $ev1)        && $prodtree2=='' && $brand2=='' )) {
      
-		echo "DEBUG Rule 4 $prodtree, $event, $brand\n";
-		
         $line = array( 'node' => $node, 
                              'artnr' => $artnr, 
                              'color' => $color,  
@@ -285,10 +264,10 @@ foreach ($iData as $mappingLine) {
       }        
     }
   }
-  if ( !$found) {
-    echo "DEBUG: NOT FOUND!\n";
-    print_r($mappingLine);
-  }
+//  if ( !$found) {
+//    echo "DEBUG: NOT FOUND!\n";
+//    print_r($mappingLine);
+//  }
 }
 
 
