@@ -15,23 +15,29 @@ function outputLine ( $iDataLine, $nDataLine ) {
   $artikelNr        = $iDataLine['artnr'];
   $artikelColor     = $iDataLine['color'];
   $artikelProdtree  = $iDataLine['prodtree'];
-  if ( isset($iDataLine['event'])) {
+  
+  if ( isset($iDataLine['ev1'])) {
+    $artikelEvent   = $iDataLine['ev1'];
+  } else if ( isset($iDataLine['event'])) {
     $artikelEvent   = $iDataLine['event'];
   } else {
     $artikelEvent   = '';  
   }
-  if (isset($iDataLine['brand2'])) {
+
+  if (isset($iDataLine['brand1'])) {
+    $artikelBrand   = $iDataLine['brand1'];
+  } else if (isset($iDataLine['brand2'])) {
     $artikelBrand   = $iDataLine['brand2'];
   } else {
     $artikelBrand   = '';
   }  
-  
+
   $line = array( 'node'     => $nodeNode, 
                  'artnr'    => $artikelNr, 
                  'color'    => $artikelColor,  
                  'prodtree' => $artikelProdtree, 
                  'event'    => $artikelEvent, 
-                 'event2'   => $nodeEvent2, 
+                 'event2'   => $iDataLine['ev2'], 
                  'brand'    => $artikelBrand );
 
   foreach ($line as $word) {
@@ -53,16 +59,22 @@ function outputNodeLine ( $iData, $nDataLine ) {
     $artikelNr        = $iDataLine['artnr'];
     $artikelColor     = $iDataLine['color'];
     $artikelProdtree  = $iDataLine['prodtree'];
-    if ( isset($iDataLine['event'])) {
+    
+    if ( isset($iDataLine['ev1'])) {
+      $artikelEvent   = $iDataLine['ev1'];
+    } else if ( isset($iDataLine['event'])) {
       $artikelEvent   = $iDataLine['event'];
     } else {
       $artikelEvent   = '';  
     }
-    if (isset($iDataLine['brand2'])) {
+
+    if (isset($iDataLine['brand1'])) {
+      $artikelBrand   = $iDataLine['brand1'];
+    } else if (isset($iDataLine['brand2'])) {
       $artikelBrand   = $iDataLine['brand2'];
     } else {
       $artikelBrand   = '';
-    }    
+    }     
 
     //001
     if ( !$nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
