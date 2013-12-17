@@ -16,17 +16,18 @@ function outputLine ( $iDataLine, $nDataLine ) {
   $artikelColor     = $iDataLine['color'];
   $artikelProdtree  = $iDataLine['prodtree'];
   
-  if ( isset($iDataLine['ev1'])) {
+  if ( $iDataLine['ev1']) {
     $artikelEvent   = $iDataLine['ev1'];
-  } else if ( isset($iDataLine['event'])) {
+  } else if ( $iDataLine['event']) {
     $artikelEvent   = $iDataLine['event'];
   } else {
     $artikelEvent   = '';  
   }
-
-  if (isset($iDataLine['brand1'])) {
+  $artikelEvent2   = $iDataLine['ev2'];
+  
+  if ($iDataLine['brand1']) {
     $artikelBrand   = $iDataLine['brand1'];
-  } else if (isset($iDataLine['brand2'])) {
+  } else if ($iDataLine['brand2']) {
     $artikelBrand   = $iDataLine['brand2'];
   } else {
     $artikelBrand   = '';
@@ -37,7 +38,7 @@ function outputLine ( $iDataLine, $nDataLine ) {
                  'color'    => $artikelColor,  
                  'prodtree' => $artikelProdtree, 
                  'event'    => $artikelEvent, 
-                 'event2'   => $iDataLine['ev2'], 
+                 'event2'   => $artikelEvent2, 
                  'brand'    => $artikelBrand );
 
   foreach ($line as $word) {
@@ -60,70 +61,126 @@ function outputNodeLine ( $iData, $nDataLine ) {
     $artikelColor     = $iDataLine['color'];
     $artikelProdtree  = $iDataLine['prodtree'];
     
-    if ( isset($iDataLine['ev1'])) {
+    if ( $iDataLine['ev1']) {
       $artikelEvent   = $iDataLine['ev1'];
-    } else if ( isset($iDataLine['event'])) {
+    } else if ( $iDataLine['event']) {
       $artikelEvent   = $iDataLine['event'];
     } else {
       $artikelEvent   = '';  
     }
+    $artikelEvent2   = $iDataLine['ev2'];
 
-    if (isset($iDataLine['brand1'])) {
+    if ($iDataLine['brand1']) {
       $artikelBrand   = $iDataLine['brand1'];
-    } else if (isset($iDataLine['brand2'])) {
+    } else if ($iDataLine['brand2']) {
       $artikelBrand   = $iDataLine['brand2'];
     } else {
       $artikelBrand   = '';
-    }     
-
-    //001
-    if ( !$nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
-      if ( $nodeBrand  == $artikelBrand )  {
-        outputLine ( $iDataLine, $nDataLine );
-      }
-    } 
-
-    //010
-    else if ( !$nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
-      if ( $nodeEvent1 == $artikelEvent )  {
-        outputLine ( $iDataLine, $nDataLine );
-      }
-    } 
-
-    //011
-    else if ( !$nodeProdtree && $nodeEvent1 && $nodeBrand ) {
-      if ( ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
-        outputLine ( $iDataLine, $nDataLine );
-      }
-    } 
-
-    //100
-    else if ( $nodeProdtree && !$nodeEvent1 && !$nodeBrand ) {
-      if ( $nodeProdtree == $artikelProdtree ) {
-        outputLine ( $iDataLine, $nDataLine );
-      }
-    }
-
-    //101
-    else if ( $nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
-      if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeBrand  == $artikelBrand ) )  {
-        outputLine ( $iDataLine, $nDataLine );
-      }
-    } 
-
-    //110
-    else if ( $nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
-      if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) )  {
-        outputLine ( $iDataLine, $nDataLine );
-      }
     }    
 
-    //111
-    else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
-      if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
-        outputLine ( $iDataLine, $nDataLine );
+    if ( $nodeEvent2 )
+    {
+      //001
+      if ( !$nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
+        if (( $artikelEvent2 == $nodeEvent2 ) && ( $nodeBrand  == $artikelBrand ))  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //010
+      else if ( !$nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
+        if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeEvent1 == $artikelEvent ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //011
+      else if ( !$nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //100
+      else if ( $nodeProdtree && !$nodeEvent1 && !$nodeBrand ) {
+        if (( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree )) {
+          outputLine ( $iDataLine, $nDataLine );
+        }
       }
-    }  
+
+      //101
+      else if ( $nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
+        if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //110
+      else if ( $nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
+        if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      }    
+
+      //111
+      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      }  
+    } else {
+      ///////
+      //001
+      if ( !$nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
+        if ( $nodeBrand  == $artikelBrand )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //010
+      else if ( !$nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
+        if ( $nodeEvent1 == $artikelEvent )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //011
+      else if ( !$nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        if ( ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //100
+      else if ( $nodeProdtree && !$nodeEvent1 && !$nodeBrand ) {
+        if ( $nodeProdtree == $artikelProdtree ) {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      }
+
+      //101
+      else if ( $nodeProdtree && !$nodeEvent1 && $nodeBrand ) {
+        if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      } 
+
+      //110
+      else if ( $nodeProdtree && $nodeEvent1 && !$nodeBrand ) {
+        if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      }    
+
+      //111
+      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
+          outputLine ( $iDataLine, $nDataLine );
+        }
+      }  
+
+      ///////
+    }
   }
 }
 
