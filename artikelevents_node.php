@@ -33,18 +33,15 @@ if (($handle = fopen($EventsFileName, "r")) !== FALSE) {
   fgetcsv($handle, 1000, $sep); //skip first line
   while (($line = fgetcsv($handle, 1000, $sep)) !== FALSE) {
     $linecount++;
-    if(count($line)==16) {
+    if(count($line)==9) {
       $iData[] = array(  'artnr' => $line[0], 'color'  => $line[1], 
-                         'prodtree' => $line[2], 'brand1' => $line[3],
+                         'prodtree' => $line[2], 'brand' => $line[3],
                          'ev1' => $line[4], 'ev2' => $line[5],
                          'ev3' => $line[6], 'ev4' => $line[7],              
-                         'ev5' => $line[8], 'event' => $line[9],
-			 'description' => $line[10], 'item' => $line[11], 
-			 'company' => $line[12], 'brand2' => $line[13], 
-			 'itemname' => $line[14], 'dummy' => $line[15] );
+                         'ev5' => $line[8]  );
     }
     else {
-      echo "ERROR: Column count in eventsfile is not 16 but ".count($line)." at ".$linecount."!\n";
+      echo "ERROR: Column count in eventsfile is not 9 but ".count($line)." at ".$linecount."!\n";
     }
   }
 } else {
@@ -65,7 +62,7 @@ if (($handle = fopen($NodeFileName, "r")) !== FALSE) {
                          'ev2'      => $line[4], 'brand'        => $line[5] );
     }  
     else {
-            echo "ERROR: Column count in nodefile is not 6 at ".$linecount."!\n";
+      echo "ERROR: Column count in nodefile is not 6 at ".$linecount."!\n";
     }	
   }
 } else {
@@ -73,8 +70,10 @@ if (($handle = fopen($NodeFileName, "r")) !== FALSE) {
 }
 fclose($handle);
 
+//print_r($nData);
+
 //echo header
-$line = array( 'node' => '', 
+$line = array(        'node' => '', 
                      'artnr' => '', 
                      'color' => '',  
                      'prodtree' => '', 
