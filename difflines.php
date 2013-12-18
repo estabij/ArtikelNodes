@@ -1,32 +1,57 @@
 <?php
+/*
+ * difflines file1 file2 > results
+ * returns the changes needed to make the old file into the new file
+ * + are the additions, - are the lines to be removed
+ */
+if ( count($argv) != 3) {
+  die('Usage: difflines.php oldfile newfile > result');
+}
 
-//read file produced with old method
-$oldlines = file("data/combined_oldmethod.csv");
-if (!$oldlines) {
-  die("ERROR: Cannot read lines produced with the old method!\n");
+$oldFileName = $argv[1];
+$newFileName = $argv[2];
+
+$old = file($oldFileName);
+if (!$old) {
+  die('ERROR: Cannot read '.$oldFileName."\n");
 }
 
 //read file produced with new method
-$newlines = file("data/combined.csv");
-if (!$newlines) {
-  die("ERROR: Cannot read lines produced with the new method!\n");
+$new = file($newFileName);
+if (!$new) {
+  die('ERROR: Cannot read '.$newFileName."\n");
 }
 
-//write file containing the difference between the newlines and the oldlines
-
-if (($handle = fopen("data/diff.csv", "w")) !== FALSE) {
-  foreach($newlines as $newline) {
-    $found = false;
-    foreach($oldlines as $oldline) {
-      if ( $oldline == $newline ) {
-        $found = true;
-        break;
-      }
+function diff($old, $new){
+    $matrix = array();
+    $maxlen = 0;
+    foreach($old as $oindex => $ovalue){
+        $nkeys = array_keys($new, $ovalue);
+        foreach($nkeys as $nindex){
+            $matrix[$oindex][$nindex] = isset($matrix[$oindex - 1][$nindex - 1]) ?
+                $matrix[$oindex - 1][$nindex - 1] + 1 : 1;
+            if($matrix[$oindex][$nindex] > $maxlen){
+                $maxlen = $matrix[$oindex][$nindex];
+                $omax = $oindex + 1 - $maxlen;
+                $nmax = $nindex + 1 - $maxlen;
+            }
+        }
     }
-    if ( !$found) {
-      fprintf($handle, "%s\n", $newline);
-    }
-  }
+    if($maxlen == 0) return array(array('d'=>$old, 'i'=>$new));
+    return array_merge(
+        diff(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)),
+        array_slice($new, $nmax, $maxlen),
+        diff(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen)));
 }
-fclose($handle);
-?>
+
+$result = diff($old, $new);
+
+foreach($result as $k) {
+    if(is_array($k)) {
+        $d = empty($k['d']) ? '' : '-'.implode(' ',$k['d']);
+        $a = empty($k['i']) ? '' : '+'.implode(' ',$k['i']);
+        echo $d;
+        if ($a) { echo PHP_EOL; }
+        echo $a;
+    }
+}
