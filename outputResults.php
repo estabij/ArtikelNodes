@@ -42,12 +42,12 @@ function outputNodeLine ( $iData, $nDataLine ) {
   $nodeEvent2       = $nDataLine['ev2']; 
   $nodeBrand        = $nDataLine['brand'];
   
-  echo "node=".$nodeNode."\n";
-  echo "nodeProdTree=".$nodeProdtree."\n";
-  echo "nodeEvent1=".$nodeEvent1."\n";
-  echo "nodeEvent2=".$nodeEvent2."\n";
-  echo "nodeBrand=".$nodeBrand."\n";
-      
+//  echo "node=".$nodeNode."\n";
+//  echo "nodeProdTree=".$nodeProdtree."\n";
+//  echo "nodeEvent1=".$nodeEvent1."\n";
+//  echo "nodeEvent2=".$nodeEvent2."\n";
+//  echo "nodeBrand=".$nodeBrand."\n";
+//      
   foreach ( $iData as $iDataLine ) { 
     
     $artikelProdtree  = $iDataLine['prodtree'];
@@ -55,21 +55,21 @@ function outputNodeLine ( $iData, $nDataLine ) {
     $artikelEvent     = $iDataLine['ev1'];
     $artikelEvent2    = $iDataLine['ev2'];
     
-    echo "artikelProdtree=".$artikelProdtree."\n";
-    echo "artikelBrand=".$artikelBrand."\n";
-    echo "artikelEvent=".$artikelEvent."\n";
-    echo "artikelEvent2=".$artikelEvent2."\n";
-         
+//    echo "artikelProdtree=".$artikelProdtree."\n";
+//    echo "artikelBrand=".$artikelBrand."\n";
+//    echo "artikelEvent=".$artikelEvent."\n";
+//    echo "artikelEvent2=".$artikelEvent2."\n";
+//         
     if ( $nodeEvent2 )
     {
-      echo "nodeEvent2=".$nodeEvent2."\n";
-      echo "nodeProdtree=".$nodeProdtree."\n";
-      echo "nodeEvent1=".$nodeEvent1."\n";
-      echo "nodeBrand=".$nodeBrand."\n";
-      
+//      echo "nodeEvent2=".$nodeEvent2."\n";
+//      echo "nodeProdtree=".$nodeProdtree."\n";
+//      echo "nodeEvent1=".$nodeEvent1."\n";
+//      echo "nodeBrand=".$nodeBrand."\n";
+//      
       //1001
       if ( (!$nodeProdtree) && (!$nodeEvent1) && $nodeBrand ) {
-        echo "1001\n";
+        //echo "1001\n";
         if (( $artikelEvent2 == $nodeEvent2 ) && ( $nodeBrand  == $artikelBrand ))  {
           outputLine ( $iDataLine, $nDataLine );
         }
@@ -77,7 +77,7 @@ function outputNodeLine ( $iData, $nDataLine ) {
 
       //1010
       else if ( (!$nodeProdtree) && $nodeEvent1 && (!$nodeBrand) ) {
-        echo "1010\n";
+        //echo "1010\n";
         if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeEvent1 == $artikelEvent ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
@@ -85,7 +85,7 @@ function outputNodeLine ( $iData, $nDataLine ) {
 
       //1011
       else if ( (!$nodeProdtree) && $nodeEvent1 && $nodeBrand ) {
-        echo "1011\n";
+        //echo "1011\n";
         if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
@@ -93,28 +93,31 @@ function outputNodeLine ( $iData, $nDataLine ) {
 
       //1100
       else if ( $nodeProdtree && (!$nodeEvent1) && (!$nodeBrand) ) {
-        echo "1100\n";
+        //echo "1100\n";
         if (( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree )) {
           outputLine ( $iDataLine, $nDataLine );
         }
       }
 
       //1101
-      else if ( $nodeProdtree && (!$nodeEvent1) && $nodeBrand ) {echo "1101\n";
+      else if ( $nodeProdtree && (!$nodeEvent1) && $nodeBrand ) {
+        //echo "1101\n";
         if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       } 
 
       //1110
-      else if ( $nodeProdtree && $nodeEvent1 && (!$nodeBrand) ) {echo "1110\n";
+      else if ( $nodeProdtree && $nodeEvent1 && (!$nodeBrand) ) {
+        //echo "1110\n";
         if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       }    
 
       //1111
-      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {echo "1111\n";
+      else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
+        //echo "1111\n";
         if ( ( $artikelEvent2 == $nodeEvent2 ) && ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
@@ -122,42 +125,48 @@ function outputNodeLine ( $iData, $nDataLine ) {
     } else {
      
       //0001
-      if ( (!$nodeProdtree) && (!$nodeEvent1) && $nodeBrand ) { echo "0001\n";
+      if ( (!$nodeProdtree) && (!$nodeEvent1) && $nodeBrand ) { 
+        //echo "0001\n";
         if ( $nodeBrand  == $artikelBrand )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       } 
 
       //0010    
-      else if ( (!$nodeProdtree) && $nodeEvent1 && (!$nodeBrand) ) {echo "0010\n";
+      else if ( (!$nodeProdtree) && $nodeEvent1 && (!$nodeBrand) ) {
+        //echo "0010\n";
         if ( $nodeEvent1 == $artikelEvent )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       } 
 
       //0011      
-      else if ( (!$nodeProdtree) && $nodeEvent1 && $nodeBrand ) {echo "0011\n";
+      else if ( (!$nodeProdtree) && $nodeEvent1 && $nodeBrand ) {
+        //echo "0011\n";
         if ( ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       } 
 
       //0100    
-      else if ( $nodeProdtree && (!$nodeEvent1) && (!$nodeBrand) ) {echo "0100\n";
+      else if ( $nodeProdtree && (!$nodeEvent1) && (!$nodeBrand) ) {
+        //echo "0100\n";
         if ( $nodeProdtree == $artikelProdtree ) {
           outputLine ( $iDataLine, $nDataLine );
         }
       }
 
       //0101  
-      else if ( $nodeProdtree && (!$nodeEvent1) && $nodeBrand ) {echo "0101\n";
+      else if ( $nodeProdtree && (!$nodeEvent1) && $nodeBrand ) {
+        //echo "0101\n";
         if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
       } 
 
       //0110
-      else if ( $nodeProdtree && $nodeEvent1 && (!$nodeBrand) ) {echo "0110\n";
+      else if ( $nodeProdtree && $nodeEvent1 && (!$nodeBrand) ) {
+        //echo "0110\n";
         if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) )  {
           outputLine ( $iDataLine, $nDataLine );
         }
@@ -165,15 +174,15 @@ function outputNodeLine ( $iData, $nDataLine ) {
 
       //0111     
       else if ( $nodeProdtree && $nodeEvent1 && $nodeBrand ) {
-        echo "0111\n";
-        echo "VOOR\n";
-                 echo $nodeProdtree.'-'.$artikelProdtree.' -- '.$nodeEvent1.'-'.$artikelEvent.' -- '.$nodeBrand.'-'.$artikelBrand."\n";
+//        echo "0111\n";
+//        echo "VOOR\n";
+//                 echo $nodeProdtree.'-'.$artikelProdtree.' -- '.$nodeEvent1.'-'.$artikelEvent.' -- '.$nodeBrand.'-'.$artikelBrand."\n";
  
         if ( ( $nodeProdtree == $artikelProdtree ) && ( $nodeEvent1 == $artikelEvent ) && ( $nodeBrand  == $artikelBrand ) )  {
           outputLine ( $iDataLine, $nDataLine );
-          echo "PRINTLINE\n";
+//          echo "PRINTLINE\n";
         }
-        echo "NA\n";
+//        echo "NA\n";
       }  
 
     }
