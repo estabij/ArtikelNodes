@@ -1,5 +1,9 @@
 <?php
 
+//log our actions
+$fhLog = fopen('log.log', "w");
+$mappedcounter = 0;
+
 $sep = ";";
 
 // get the command line parameters
@@ -66,6 +70,8 @@ if (($handle = fopen($ArtikelEventsFileName, "r")) !== FALSE) {
 }
 fclose($handle);
 
+
+        
 // extend the article items with the events
 $mapping = array();
 foreach ($iData as $iDataLine) {
@@ -115,6 +121,7 @@ foreach ($iData as $iDataLine) {
                   'ev5'     => $iDataLine['ev5'] );
 
   }
+  fwrite($fhLog, "mapped $mappedcounter\n"); $mappedcounter++;
 }
 
 $hdr = array( 'artnr', 'color', 'prodtree', 'brand', 'ev1', 'ev2', 'ev3', 'ev4', 'ev5' );
@@ -130,3 +137,5 @@ foreach($mapping as $line) {
   }
   echo "\n";
 }
+
+fclose($fhLog);
